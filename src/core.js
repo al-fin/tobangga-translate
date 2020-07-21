@@ -12,11 +12,6 @@ export function translate(lang = "id", text = "") {
     const pattern_end = /[a-z|A-Z]$/g;
     const cleanup = /[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]tos/g;
 
-    // translate words
-    wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
-    });
-
     // add suffix tos
     output = output.replace(pattern, function (a, b) {
       return `tos${output[b]}`;
@@ -25,13 +20,18 @@ export function translate(lang = "id", text = "") {
       return `${output[b]}tos`;
     });
 
+    // translate words
+    wordlist.forEach((word) => {
+      output = output.replace(word.pattern, word.meaning);
+    });
+
     // cleanup
     output = output.replace(cleanup, function (a, b) {
       console.log(b);
       return output[b] || output[b];
     });
   } else if (lang === "to") {
-    // to : tobangga langauge
+    // to : tobangga language
 
     const wordlist = [
       {
@@ -41,14 +41,14 @@ export function translate(lang = "id", text = "") {
     ];
     const pattern = /tos[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]|tos$/g;
 
-    // remove tos
-    output = output.replace(pattern, function (a, b) {
-      return output[b + 3] || "";
-    });
-
     // translate words
     wordlist.forEach((word) => {
       output = output.replace(word.pattern, word.meaning);
+    });
+
+    // remove tos
+    output = output.replace(pattern, function (a, b) {
+      return output[b + 3] || "";
     });
   }
   return output;
