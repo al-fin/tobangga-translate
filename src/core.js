@@ -28,8 +28,10 @@ export function translate(lang = "id", text = "") {
     // cleanup
     output = output.replace(cleanup, function (a, b) {
       console.log(b);
-      return output[b] || output[b];
+      return output[b];
     });
+
+    output = output.replace(/tobanggatos/gi, "tobangga");
   } else if (lang === "to") {
     // to : tobangga language
 

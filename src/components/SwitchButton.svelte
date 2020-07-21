@@ -36,6 +36,7 @@
     border: none;
     background: none;
     padding: 0;
+    cursor: pointer;
   }
   .switch {
     width: 60px;
