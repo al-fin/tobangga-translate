@@ -41,14 +41,14 @@ export function translate(lang = "id", text = "") {
     ];
     const pattern = /tos[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]|tos$/g;
 
-    // translate words
-    wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
-    });
-
     // remove tos
     output = output.replace(pattern, function (a, b) {
       return output[b + 3] || "";
+    });
+
+    // translate words
+    wordlist.forEach((word) => {
+      output = output.replace(word.pattern, word.meaning);
     });
   }
   return output;
