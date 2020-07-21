@@ -4,18 +4,13 @@ export function translate(lang = "id", text = "") {
     // id : indonesian langauge
     const wordlist = [
       {
-        pattern: /salam/gi,
+        pattern: /salam|salamtos/gi,
         meaning: "tobangga",
       },
     ];
     const pattern = /[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]/g;
     const pattern_end = /[a-z|A-Z]$/g;
     const cleanup = /[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]tos/g;
-
-    // translate words
-    wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
-    });
 
     // add suffix tos
     output = output.replace(pattern, function (a, b) {
@@ -29,6 +24,11 @@ export function translate(lang = "id", text = "") {
     output = output.replace(cleanup, function (a, b) {
       console.log(b);
       return output[b] || output[b];
+    });
+
+    // translate words
+    wordlist.forEach((word) => {
+      output = output.replace(word.pattern, word.meaning);
     });
   } else if (lang === "to") {
     // to : tobangga language
