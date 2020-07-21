@@ -1,10 +1,10 @@
 export function translate(lang = "id", text = "") {
-  let output = text;
+  let result = text;
   if (lang === "id") {
     // id : indonesian langauge
     const wordlist = [
       {
-        pattern: /salam/gi,
+        pattern: /salamtos/gi,
         meaning: "tobangga",
       },
     ];
@@ -12,26 +12,24 @@ export function translate(lang = "id", text = "") {
     const pattern_end = /[a-z|A-Z]$/g;
     const cleanup = /[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]tos/g;
 
-    // translate words
-    wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
-    });
-
     // add suffix tos
-    output = output.replace(pattern, function (a, b) {
-      return `tos${output[b]}`;
+    result = result.replace(pattern, function (a, b) {
+      return `tos${result[b]}`;
     });
-    output = output.replace(pattern_end, function (a, b) {
-      return `${output[b]}tos`;
+    result = result.replace(pattern_end, function (a, b) {
+      return `${result[b]}tos`;
     });
 
     // cleanup
-    output = output.replace(cleanup, function (a, b) {
+    result = result.replace(cleanup, function (a, b) {
       console.log(b);
-      return output[b];
+      return result[b];
     });
 
-    output = output.replace(/tobanggatos/gi, "tobangga");
+    // translate words
+    wordlist.forEach((word) => {
+      result = result.replace(word.pattern, word.meaning);
+    });
   } else if (lang === "to") {
     // to : tobangga language
 
@@ -45,13 +43,13 @@ export function translate(lang = "id", text = "") {
 
     // translate words
     wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
+      result = result.replace(word.pattern, word.meaning);
     });
 
     // remove tos
-    output = output.replace(pattern, function (a, b) {
-      return output[b + 3] || "";
+    result = result.replace(pattern, function (a, b) {
+      return result[b + 3] || "";
     });
   }
-  return output;
+  return result;
 }
