@@ -12,17 +12,17 @@ export function translate(lang = "id", text = "") {
     const pattern_end = /[a-z|A-Z]$/g;
     const cleanup = /[/\s-!$%^&*()_+|~=`{}\[\]:";'<>?,.]tos/g;
 
+    // translate words
+    wordlist.forEach((word) => {
+      output = output.replace(word.pattern, word.meaning);
+    });
+
     // add suffix tos
     output = output.replace(pattern, function (a, b) {
       return `tos${output[b]}`;
     });
     output = output.replace(pattern_end, function (a, b) {
       return `${output[b]}tos`;
-    });
-
-    // translate words
-    wordlist.forEach((word) => {
-      output = output.replace(word.pattern, word.meaning);
     });
 
     // cleanup
@@ -35,7 +35,7 @@ export function translate(lang = "id", text = "") {
 
     const wordlist = [
       {
-        pattern: /tobanga|tobangga/gi,
+        pattern: /tobanga|tobangga|tobangatos|tobanggatos/gi,
         meaning: "salam",
       },
     ];
